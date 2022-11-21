@@ -89,3 +89,16 @@ font-weight: bold;
     }
     
  }
+
+ #start{
+    height: 200px;
+    width: 1000px;
+    margin: auto;
+    background-color:#b3283391;
+    margin-top: 100px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Pac;
+ }

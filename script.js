@@ -3,9 +3,9 @@ cross = true;
 audio = new Audio('music.mp3');
 jump = new Audio('jump.mp3');
 audioGo = new Audio('Gameover.mp3');
-setTimeout(() => {
-    audio.play();
-}, 1000);
+// setTimeout(() => {
+//     audio.play();
+// }, 1000);
 document.onkeydown = function(e){
     
     if(e.keyCode==38){
@@ -50,6 +50,11 @@ setInterval(() => {
         setTimeout(() => {
             audioGo.pause();
         }, 2500);
+
+        let start=document.getElementById('start');
+        start.innerHTML="Play Again";
+        start.style.visibility = 'visible';
+
     }
     else if( offsetX < 145 && cross){
         score += 1;
@@ -73,4 +78,15 @@ setInterval(() => {
 function updateScore(score){
     scoreCont.innerHTML = "Your Score: " +score;
     jump.play();
+}
+
+function start(){
+    score=0;
+    let start=document.getElementById('start');
+    let frog = document.getElementsByClassName('frog');
+    scoreCont.innerHTML= "Your Score: "+0;
+    start.style.visibility='hidden';
+    over.style.visibility = 'hidden';
+    frog[0].classList.add('frogAni');
+    audio.play();
 }
