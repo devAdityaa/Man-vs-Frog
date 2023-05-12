@@ -37,13 +37,17 @@ document.onkeydown = function (e) {
 
   //Testing
   if (e.keyCode == 69) {
-    createFrog();
+    //createFrog();
+    updateWave();
+    console.log("Sending Wave: " + current_wave);
+    sendWave(frogs_per_wave[current_wave]);
   }
 };
 
 setInterval(() => {
   hero = document.querySelector(".hero");
   over = document.querySelector(".over");
+  won = document.querySelector(".won");
   frog = document.querySelector(".frog");
 
   //This must be removed soon
@@ -52,54 +56,64 @@ setInterval(() => {
   dx = parseInt(window.getComputedStyle(hero, null).getPropertyValue("left"));
   dy = parseInt(window.getComputedStyle(hero, null).getPropertyValue("top"));
 
+  /*
   ox = parseInt(window.getComputedStyle(frog, null).getPropertyValue("left"));
   oy = parseInt(window.getComputedStyle(frog, null).getPropertyValue("top"));
   offsetX = Math.abs(dx - ox);
   offsetY = Math.abs(dy - oy);
+  */
 
-  //Check if last frog in current_frogs array has reached end of screen
-  current_ox = parseInt(window.getComputedStyle(current_frogs[current_frogs.length - 1], null).getPropertyValue("left"));
-  if (current_ox < 0) {
-    removeFrog(frog);
-    //Send next wave of frogs!
-    //updateWave();
-  };
+  /*
+    1. Check all frogs positions and remove them as they reach  end of screen
+  */
+  for(let i = 0; i < current_frogs.length; i++) {
+    current_frog_ox = parseInt(window.getComputedStyle(current_frogs[i], null).getPropertyValue("left"));
+    current_frog_oy = parseInt(window.getComputedStyle(current_frogs[i], null).getPropertyValue("top"));
 
-  if (offsetX < 70 && offsetY < 45) {
-    over.style.visibility = "visible";
-    frog.classList.remove("frogAni");
-    audio.pause();
-    audioGo.play();
+    offsetX = Math.abs(dx - current_frog_ox);
+    offsetY = Math.abs(dy - current_frog_oy);
 
-    setTimeout(() => {
-      audioGo.pause();
-    }, 2500);
+    if (current_frog_ox < 0) {
+      removeFrog(current_frogs[i]);
+    };
 
-    let start = document.getElementById("start");
-    start.innerHTML = "Play Again";
-    start.style.visibility = "visible";
-  } else if (offsetX < 145 && cross) {
-    score += 1;
+    if (offsetX < 70 && offsetY < 45) {
+      over.style.visibility = "visible";
+      current_frogs[i].classList.remove("frogAni");
+      audio.pause();
+      audioGo.play();
 
-    updateScore(score);
-    cross = false;
-    setTimeout(() => {
-      cross = true;
-    }, 1000);
-    setTimeout(() => {
-      aniDur = parseFloat(
-        window
-          .getComputedStyle(frog, null)
-          .getPropertyValue("animation-duration")
-      );
-      newDur = aniDur - 0;
-      current_frogs.forEach((frog) => {
-        frog.style.animationDuration = newDur + "s";
-      });
+      setTimeout(() => {
+        audioGo.pause();
+      }, 2500);
 
-      frog.style.animationDuration = newDur + "s";
-    }, 500);
+      let start = document.getElementById("start");
+      start.innerHTML = "Play Again";
+      start.style.visibility = "visible";
+    } else if (offsetX < 145 && cross) {
+      score += 1;
+
+      updateScore(score);
+      cross = false;
+      setTimeout(() => {
+        cross = true;
+      }, 1000);
+      setTimeout(() => {
+        aniDur = parseFloat(
+          window
+            .getComputedStyle(frog, null)
+            .getPropertyValue("animation-duration")
+        );
+        newDur = aniDur - 0;
+        current_frogs.forEach((frog) => {
+          current_frogs[i].style.animationDuration = newDur + "s";
+        });
+
+        current_frogs[i].style.animationDuration = newDur + "s";
+      }, 500);
+    }
   }
+
 }, 10);
 
 function updateScore(score) {
@@ -110,20 +124,20 @@ function updateScore(score) {
 function updateWave() {
   current_wave++;
   currentWave.innerHTML = "Wave: " + current_wave;
-  console.log(current_wave);
-
   sendWave();
 }
 
 function start() {
   score = 0;
   let start = document.getElementById("start");
-  //let frog = document.getElementsByClassName("frog");
   scoreCont.innerHTML = "Your Score: " + 0;
   start.style.visibility = "hidden";
   over.style.visibility = "hidden";
-  //frog[0].classList.add("frogAni");
+  won.style.visibility = "hidden";
   audio.play();
+
+  //Start first wave!
+  sendWave(frogs_per_wave[current_wave]);
 }
 
 function removeFrog(frog) {
@@ -134,6 +148,7 @@ function removeFrog(frog) {
   //If all frogs have cleared the screen, next wave!
   if(current_frogs.length <= 0) {
     updateWave();
+    sendWave(frogs_per_wave[current_wave]);
   }
 }
 
@@ -150,7 +165,12 @@ function createFrog() {
 }
 
 function sendWave(amount) {
-  for(var i = 0; i < amount; i++) {
-    createFrog();
+
+  if(current_wave == frogs_per_wave.length) {
+    won.style.visibility = "visible";
+  }
+
+  for(let i = 0; i < amount; i++) {
+    setTimeout(createFrog, Math.random() * 800);
   }
 }

@@ -20,6 +20,16 @@ body{
  width:100%;
  height:100vh;
  }
+
+.won {
+  font-family: Pac;
+  position: relative;
+  top: 63px;
+  font-size: 50px;
+  text-align: center;
+  visibility: hidden;
+}
+
  .over{
 
     font-family: Pac;
