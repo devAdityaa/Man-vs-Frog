@@ -8,7 +8,7 @@ audioGo = new Audio("Gameover.mp3");
 // }, 1000);
 
 //each number is the frogs for that wave, w0 = 1, w1 = 2, w2 = 4, etc...
-frogs_per_wave = [1,2,4,8,4,2,1];
+frogs_per_wave = [1,2,4,6,6,6,8];
 current_frogs = [];
 current_wave = 0;
 
@@ -171,6 +171,6 @@ function sendWave(amount) {
   }
 
   for(let i = 0; i < amount; i++) {
-    setTimeout(createFrog, Math.random() * 800);
+    setTimeout(createFrog, Math.random() * (2000 - 300) + 300);
   }
 }
