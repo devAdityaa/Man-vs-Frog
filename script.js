@@ -87,6 +87,7 @@ function start() {
   let frog = document.getElementsByClassName("frog");
   scoreCont.innerHTML = "Your Score: " + 0;
   start.style.visibility = "hidden";
+  instructions.style.visibility = "hidden";
   over.style.visibility = "hidden";
   frog[0].classList.add("frogAni");
   audio.play();
