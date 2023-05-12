@@ -6,6 +6,11 @@ audioGo = new Audio("Gameover.mp3");
 // setTimeout(() => {
 //     audio.play();
 // }, 1000);
+
+frogs_per_wave = [1,2,4,8,4,2,1];
+current_frogs = [];
+current_wave = 0;
+
 document.onkeydown = function (e) {
   if (e.keyCode == 38) {
     hero = document.querySelector(".hero");
@@ -27,6 +32,11 @@ document.onkeydown = function (e) {
       window.getComputedStyle(hero, null).getPropertyValue("left")
     );
     hero.style.left = heroX - 50 + "px";
+  }
+
+  //Testing
+  if (e.keyCode == 69) {
+    createFrog();
   }
 };
 
@@ -90,4 +100,26 @@ function start() {
   over.style.visibility = "hidden";
   frog[0].classList.add("frogAni");
   audio.play();
+}
+
+function updateWave() {
+  current_wave++;
+  console.log(current_wave);
+}
+
+//Creates a new Frog element on screen!
+function createFrog() {
+  const frog = document.createElement('div');
+  frog.classList.add("frog");
+  document.getElementsByClassName("container")[0].append(frog);
+  frog.classList.add("frogAni");
+
+  //Add frog to frogs list
+  current_frogs.push(frog);
+  console.log(current_frogs);
+  console.log("Added Frog!");
+}
+
+function sendWave(amount) {
+
 }

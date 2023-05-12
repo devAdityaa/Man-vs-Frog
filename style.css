@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: Pac;
-   
+
 src: url('\PAC-FONT.TTF');
 }
 *{
@@ -11,7 +11,7 @@ src: url('\PAC-FONT.TTF');
 }
 body{
     overflow: hidden;
-    
+
 }
 .container{
  background-image: url(bg.jpg);
@@ -21,26 +21,41 @@ body{
  height:100vh;
  }
  .over{
-    
+
     font-family: Pac;
     position: relative;
     top: 63px;
     font-size: 50px;
     text-align: center;
     visibility: hidden;
-    
+
  }
- #scoreCont{
+
+ #currentWave{
     position: absolute;
     font-family: comic neue;
     color: rgb(0, 0, 0);
-   right: 45px;
-font-weight: bold;
+    right: 176px;
+    font-weight: bold;
     top: 31px;
     border: 2px solid black;
     padding: 10px;
     border-radius: 60%;
     background-color: bisque;
+}
+
+ #scoreCont{
+    position: absolute;
+    font-family: comic neue;
+    color: rgb(0, 0, 0);
+    right: 45px;
+    font-weight: bold;
+    top: 31px;
+    border: 2px solid black;
+    padding: 10px;
+    border-radius: 60%;
+    background-color: bisque;
+
 
  }
  .hero{
@@ -75,7 +90,7 @@ font-weight: bold;
     100%{
         bottom:-12px;
     }
-    
+
  }
 .frogAni{
     animation: frogAni 5s linear infinite;
@@ -87,7 +102,7 @@ font-weight: bold;
     100%{
         left:-10vw;
     }
-    
+
  }
 
  #start{
