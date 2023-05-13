@@ -132,6 +132,7 @@ function start() {
   let start = document.getElementById("start");
   scoreCont.innerHTML = "Your Score: " + 0;
   start.style.visibility = "hidden";
+  instructions.style.visibility = "hidden";
   over.style.visibility = "hidden";
   won.style.visibility = "hidden";
   audio.play();
