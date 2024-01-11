@@ -162,6 +162,10 @@ body {
   align-items: center;
   font-family: Pac;
 }
+#start:hover {
+  background-color: #b32833;
+  cursor: pointer;
+}
 #instructions {
   height: 150px;
   width: 300px;
@@ -173,4 +177,8 @@ body {
   justify-content: center;
   align-items: center;
   font-family: comic neue;
+}
+
+#controls p, button{
+  font-size: 20px;
 }
