@@ -88,7 +88,7 @@ setInterval(() => {
       }, 2500);
 
       let start = document.getElementById("start");
-      start.innerHTML = "Play Again";
+      start.innerHTML = "<span style='font-size:40px'>PLAY AGAIN</span>";
       start.style.visibility = "visible";
     } else if (offsetX < 145 && cross) {
       score += 1;
